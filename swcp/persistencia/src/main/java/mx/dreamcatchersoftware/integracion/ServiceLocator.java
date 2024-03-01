@@ -7,6 +7,7 @@ package mx.dreamcatchersoftware.integracion;
 
 import mx.dreamcatchersoftware.DAO.HorarioSubUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.ProfesorDAO;
+import mx.dreamcatchersoftware.DAO.ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.SubUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.UnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.UsuarioDAO;
@@ -17,12 +18,13 @@ import mx.dreamcatchersoftware.DAO.UsuarioDAO;
  * @author total
  */
 public class ServiceLocator {
-    
+    // Agregue ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO, quitar si es necesario
     private static HorarioSubUnidadAprendizajeDAO horarioSubUnidadAprendizajeDAO;
     private static ProfesorDAO profesorDAO;
     private static SubUnidadAprendizajeDAO subUnidadAprendizajeDAO;
     private static UnidadAprendizajeDAO unidadAprendizajeDAO;
     private static UsuarioDAO usuarioDAO;    
+    private static ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
     /**
      * se crea la instancia para horarioSubUnidadAprendizaje DAO si esta no existe
      */
@@ -79,4 +81,12 @@ public class ServiceLocator {
         }
     }
     
+    public static ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO getInstanceProfesorSubUnidadAprendizajeUnidadAprendizajeDAO(){
+        if(profesorSubUnidadAprendizajeUnidadAprendizajeDAO == null){
+            profesorSubUnidadAprendizajeUnidadAprendizajeDAO = new ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO();
+            return profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
+        } else{
+            return profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
+        }
+    }
 }

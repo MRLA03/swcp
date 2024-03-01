@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.dreamcatchersoftware.delgate;
+package mx.dreamcatchersoftware.delegate;
 
 /**
  *
  * @author acer
  */
-public class DelegateProfesor {
+public class DelegateUnidadAprendizaje {
     
 }

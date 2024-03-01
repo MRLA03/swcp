@@ -5,24 +5,26 @@
  */
 package mx.dreamcatchersoftware.integracion;
 
-import mx.dreamcatchersoftware.facade.FacadeHorarioSubUnidadAprendizaje;
+//import mx.dreamcatchersoftware.facade.FacadeHorarioSubUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeProfesor;
 import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
-import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;
+/*import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
+import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;*/
 import mx.dreamcatchersoftware.facade.FacadeUsuario;
-
+import mx.dreamcatchersoftware.facade.FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
 /**
  *
  * @author EduardoCardona <>
  */
 public class ServiceFacadeLocator {
     
-    private static FacadeHorarioSubUnidadAprendizaje facadeHorarioSubUnidadAprendizaje;
+    //private static FacadeHorarioSubUnidadAprendizaje facadeHorarioSubUnidadAprendizaje;
     private static FacadeProfesor facadeProfesor;
     private static FacadeSubUnidadAprendizaje facadeSubUnidadAprendizaje;
-    private static FacadeSubUnidadAprendizaje facadeUnidadAprendizaje;
+    /*private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;*/
     private static FacadeUsuario facadeUsuario;
-    
+    private static FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
+   /* 
     public static FacadeHorarioSubUnidadAprendizaje getInstanceFacadeHorarioSubUnidadAprendizaje() {
         if (facadeHorarioSubUnidadAprendizaje == null) {
             facadeHorarioSubUnidadAprendizaje = new FacadeHorarioSubUnidadAprendizaje();
@@ -30,7 +32,7 @@ public class ServiceFacadeLocator {
         } else {
             return facadeHorarioSubUnidadAprendizaje;
         }
-    }
+    }*/
     
     public static FacadeProfesor getInstanceFacadeProfesor() {
         if (facadeProfesor == null) {
@@ -49,7 +51,7 @@ public class ServiceFacadeLocator {
             return facadeSubUnidadAprendizaje;
         }
     }
-    
+    /*
     public static FacadeUnidadAprendizaje getInstanceFacadeUnidadAprendizaje() {
         if (facadeUnidadAprendizaje == null) {
             facadeUnidadAprendizaje = new FacadeUnidadAprendizaje();
@@ -57,7 +59,7 @@ public class ServiceFacadeLocator {
         } else {
             return facadeUnidadAprendizaje;
         }
-    }
+    }*/
     
     public static FacadeUsuario getInstanceFacadeUsuario() {
         if (facadeUsuario == null) {
@@ -65,6 +67,16 @@ public class ServiceFacadeLocator {
             return facadeUsuario;
         } else {
             return facadeUsuario;
+        }
+    }
+    
+    //AGREGUE ESTO, PARA EL JOIN ENTRE PROFESOR SUBUNIDADAPRENDIZAJE Y UNIDADAPRENDIZAJE
+    public static FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje getInstanceFacadeProfesorSubUnidadAprendizajeUnidadAprendizaje() {
+        if (facadeProfesorSubUnidadAprendizajeUnidadAprendizaje == null) {
+            facadeProfesorSubUnidadAprendizajeUnidadAprendizaje = new FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje();
+            return facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
+        } else {
+            return facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
         }
     }
 }

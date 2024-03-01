@@ -1,5 +1,5 @@
 
-package mx.dreamcatchersoftware.delgate;
+package mx.dreamcatchersoftware.delegate;
 
 import java.util.List;
 import mx.dreamcatchersoftware.entidad.HorarioSubUnidadAprendizaje;
