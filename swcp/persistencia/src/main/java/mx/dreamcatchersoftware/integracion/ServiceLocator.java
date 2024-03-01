@@ -7,7 +7,6 @@ package mx.dreamcatchersoftware.integracion;
 
 import mx.dreamcatchersoftware.DAO.HorarioSubUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.ProfesorDAO;
-import mx.dreamcatchersoftware.DAO.ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.SubUnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.UnidadAprendizajeDAO;
 import mx.dreamcatchersoftware.DAO.UsuarioDAO;
@@ -17,16 +16,15 @@ import mx.dreamcatchersoftware.DAO.UsuarioDAO;
  *
  * @author total
  */
-public class ServiceLocator {
-    // Agregue ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO, quitar si es necesario
+public class ServiceLocator {    
     private static HorarioSubUnidadAprendizajeDAO horarioSubUnidadAprendizajeDAO;
     private static ProfesorDAO profesorDAO;
     private static SubUnidadAprendizajeDAO subUnidadAprendizajeDAO;
     private static UnidadAprendizajeDAO unidadAprendizajeDAO;
-    private static UsuarioDAO usuarioDAO;    
-    private static ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
+    private static UsuarioDAO usuarioDAO;        
     /**
      * se crea la instancia para horarioSubUnidadAprendizaje DAO si esta no existe
+     * @return 
      */
     public static HorarioSubUnidadAprendizajeDAO getInstanceHorarioSubUnidadAprendizajeDAO(){
         if(horarioSubUnidadAprendizajeDAO == null){
@@ -38,6 +36,7 @@ public class ServiceLocator {
     }
     /**
      * se crea la instancia para profesor DAO si esta no existe
+     * @return 
      */
     public static ProfesorDAO getInstanceProfesorDAO(){
         if(profesorDAO == null){
@@ -49,6 +48,7 @@ public class ServiceLocator {
     }
     /**
      * se crea la instancia para subUnidadAprendizaje DAO si esta no existe
+     * @return 
      */
     public static SubUnidadAprendizajeDAO getInstanceSubUnidadAprendizajeDAO(){
         if(subUnidadAprendizajeDAO == null){
@@ -60,6 +60,7 @@ public class ServiceLocator {
     }
     /**
      * se crea la instancia para unidadAprendizaje DAO si esta no existe
+     * @return 
      */
     public static UnidadAprendizajeDAO getInstanceUnidadAprendizajeDAO(){
         if(unidadAprendizajeDAO == null){
@@ -71,6 +72,7 @@ public class ServiceLocator {
     }
     /**
      * se crea la instancia de usuarioDAO si esta no existe
+     * @return 
      */
     public static UsuarioDAO getInstanceUsuarioDAO(){
         if(usuarioDAO == null){
@@ -79,14 +81,5 @@ public class ServiceLocator {
         } else{
             return usuarioDAO;
         }
-    }
-    
-    public static ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO getInstanceProfesorSubUnidadAprendizajeUnidadAprendizajeDAO(){
-        if(profesorSubUnidadAprendizajeUnidadAprendizajeDAO == null){
-            profesorSubUnidadAprendizajeUnidadAprendizajeDAO = new ProfesorSubUnidadAprendizajeUnidadAprendizajeDAO();
-            return profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
-        } else{
-            return profesorSubUnidadAprendizajeUnidadAprendizajeDAO;
-        }
-    }
+    }    
 }

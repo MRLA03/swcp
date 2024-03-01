@@ -5,6 +5,8 @@
  */
 package mx.dreamcatchersoftware.delegate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import mx.dreamcatchersoftware.entidad.Profesor;
 import mx.dreamcatchersoftware.integracion.ServiceLocator;
@@ -34,14 +36,35 @@ public class DelegateProfesor {
 
     //Consulta General de profesores
     public List consultProfesores(){
-        List<Profesor> profesores = null;
+        List<Object[]> profesores = new ArrayList<>();
+        List<Object[]> profesoresV = new ArrayList<>();
         try{
-            profesores = ServiceLocator.getInstanceProfesorDAO().findAll();
+            profesores = ServiceLocator.getInstanceProfesorDAO().executeNoEntity("SELECT * FROM profesor");
         }catch(Exception e){
             System.out.println("Error al realizar la consulta de profesores negocio-delegateProfesor 2");
             System.out.println("\n "+e);            
+        }               
+        for(Object[] row: profesores){
+            List<Object[]> subUnidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeNoEntity("SELECT id_profesor FROM sub_unidad_aprendizaje WHERE id_profesor = "+row[0]+";");
+            // Crear un nuevo array para contener los elementos de ambos arrays
+            Object[] nuevoArray = new Object[row.length + subUnidad.toArray().length];
+
+            // Copiar los elementos de row al nuevo array
+            System.arraycopy(row, 0, nuevoArray, 0, row.length);
+
+            // Copiar los elementos de subUnidad al nuevo array, empezando desde el índice correcto
+            System.arraycopy(subUnidad.toArray(), 0, nuevoArray, row.length, subUnidad.toArray().length);
+
+            // Sobrescribir row con el nuevo array
+            //System.out.println(Arrays.toString(nuevoArray)+"LINEA");            
+            profesoresV.add(nuevoArray);
+            /*for (Object element : row) {
+                System.out.println(element);
+            }
+            i++;*/
         }
-        return profesores;
+        
+        return profesoresV;
     }
     
     // Consulta de usuarios por ID
@@ -62,9 +85,9 @@ public class DelegateProfesor {
     }
     // Consulta por Nombre y Apellido de Profesor
     public List consultProfesorNomApProfesor(String nombre_profesor, String apellidos_profesor){        
-        List<Profesor> profesores = null;
+        List<Object[]> profesores = null;
         try{
-            profesores =  ServiceLocator.getInstanceProfesorDAO().executeQuery("SELECT * FROM profesores WHERE nombre LIKE '%"+nombre_profesor+"%' AND apellido LIKE '%"+apellidos_profesor+"%';");
+            profesores =  ServiceLocator.getInstanceProfesorDAO().executeNoEntity("SELECT * FROM profesores WHERE nombre LIKE '%"+nombre_profesor+"%' AND apellido LIKE '%"+apellidos_profesor+"%';");
         }catch(Exception e){
             System.out.println("Error al realizar la consulta de profesores por Nombre y Apellido  por id negocio-delegateProfesor 4");
             System.out.println("\n "+e); 

@@ -69,9 +69,9 @@ public class DelegateUsuario {
     // Consulta General de Usuarios
     // PBI- PROF- UH1
     public List consultUsuarios(){
-        List<Usuario> usuarios = null;
+        List<Object[]> usuarios = null;
         try{
-            usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
+            usuarios = ServiceLocator.getInstanceUsuarioDAO().executeNoEntity("SELECT * FROM usuario;");//ServiceLocator.getInstanceUsuarioDAO().findAll();
         }catch(Exception e){
             System.out.println("Error al realizar la consulta de Usuario negocio-delegateUsuario 3");
             System.out.println("\n "+e);            
@@ -83,9 +83,7 @@ public class DelegateUsuario {
     public Usuario consultUsuariosID(int id_usuario){
         Usuario usuario = new Usuario();
         List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
-        try{
-            
-        
+        try{                    
             for(Usuario us:usuarios){
                 if(us.getIdUsuario().toString().equalsIgnoreCase(String.valueOf(id_usuario))){
                     usuario = us;

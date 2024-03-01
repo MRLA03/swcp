@@ -1,0 +1,10 @@
+mx\dreamcatchersoftware\facade\FacadeSubUnidadAprendizaje.class
+mx\dreamcatchersoftware\delegate\DelegateUnidadAprendizaje.class
+mx\dreamcatchersoftware\delegate\DelegateUsuario.class
+mx\dreamcatchersoftware\facade\FacadeProfesor.class
+mx\dreamcatchersoftware\facade\FacadeUsuario.class
+mx\dreamcatchersoftware\test\test.class
+mx\dreamcatchersoftware\delegate\DelegateSubUnidadAprendizaje.class
+mx\dreamcatchersoftware\delegate\DelegateHorarioSubUnidadAprendizaje.class
+mx\dreamcatchersoftware\integracion\ServiceFacadeLocator.class
+mx\dreamcatchersoftware\delegate\DelegateProfesor.class

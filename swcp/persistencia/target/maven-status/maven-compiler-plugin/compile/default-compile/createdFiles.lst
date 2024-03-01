@@ -1,0 +1,10 @@
+mx\dreamcatchersoftware\persistencia\InterfaceDAO.class
+mx\dreamcatchersoftware\DAO\ProfesorDAO.class
+mx\dreamcatchersoftware\persistencia\AbstractDAO.class
+mx\dreamcatchersoftware\persistencia\HibernateUtil.class
+mx\dreamcatchersoftware\test\test.class
+mx\dreamcatchersoftware\DAO\UnidadAprendizajeDAO.class
+mx\dreamcatchersoftware\DAO\UsuarioDAO.class
+mx\dreamcatchersoftware\integracion\ServiceLocator.class
+mx\dreamcatchersoftware\DAO\SubUnidadAprendizajeDAO.class
+mx\dreamcatchersoftware\DAO\HorarioSubUnidadAprendizajeDAO.class

@@ -5,11 +5,10 @@
  */
 package mx.dreamcatchersoftware.test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import mx.dreamcatchersoftware.entidad.Profesor;
-import mx.dreamcatchersoftware.entidad.ProfesorSubUnidadAprendizajeUnidadAprendizaje;
-import mx.dreamcatchersoftware.entidad.SubUnidadAprendizaje;
-import mx.dreamcatchersoftware.entidad.Usuario;
 import mx.dreamcatchersoftware.integracion.ServiceFacadeLocator;
 
 /**
@@ -39,13 +38,38 @@ public class test {
         profesor.setRfc("AALA0205036h621");
         profesor.setIdUsuario(usuario);
         ServiceFacadeLocator.getInstanceFacadeProfesor().insertProfesor(profesor);*/
-        
-                
-        List<ProfesorSubUnidadAprendizajeUnidadAprendizaje> profesores = ServiceFacadeLocator.getInstanceFacadeProfesorSubUnidadAprendizajeUnidadAprendizaje().consultProfesorUnidadAprendizaje("Algoritmos y Estructuras de Datos");
-        if (profesores != null) {
-            for (ProfesorSubUnidadAprendizajeUnidadAprendizaje sua : profesores) {
-                System.out.println(sua.getProfesor().getNombre()+ "\n");
+        /*
+        // Prueba para mostrar Usuarios
+        List<Object[]> usuarios = ServiceFacadeLocator.getInstanceFacadeUsuario().consultUsuarios();
+        if (usuarios != null) {
+            usuarios.forEach((sua) -> {
+                System.out.println(Arrays.toString(sua) + "\n");
+            });
+        } else {
+            System.out.println("La lista de subunidades de aprendizaje es nula.");
+        }    */    
+        /*List<Object[]> subUnidadesAprendizaje = ServiceFacadeLocator.getInstanceFacadeSubUnidadAprendizaje().consultProfesorUnidadAprendizaje("Algoritmos y Estructuras de Datos");
+        subUnidadesAprendizaje.forEach(new Consumer<Object[]>() {
+            @Override
+            public void accept(Object[] row) {
+                //List<Object[]> profesor = ServiceLocator.getInstanceProfesorDAO().executeNoEntity(
+                //"SELECT * FROM profesor WHERE id_profesor = "+row[1].+"";");
+                System.out.println(""+Arrays.toString(row));
             }
+        });
+        if (subUnidadesAprendizaje != null) {
+        subUnidadesAprendizaje.forEach((sua) -> {
+        System.out.println(Arrays.toString(sua) + "\n");
+        });
+        } else {
+        System.out.println("La lista de subunidades de aprendizaje es nula.");
+        }*/
+        
+        List<Object[]> prof =ServiceFacadeLocator.getInstanceFacadeProfesor().consultProfesores();
+        if (prof != null) {
+            prof.forEach((sua) -> {
+                System.out.println(Arrays.toString(sua) + "\n");
+            });
         } else {
             System.out.println("La lista de subunidades de aprendizaje es nula.");
         }

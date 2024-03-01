@@ -11,7 +11,6 @@ import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
 /*import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;*/
 import mx.dreamcatchersoftware.facade.FacadeUsuario;
-import mx.dreamcatchersoftware.facade.FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
 /**
  *
  * @author EduardoCardona <>
@@ -22,8 +21,7 @@ public class ServiceFacadeLocator {
     private static FacadeProfesor facadeProfesor;
     private static FacadeSubUnidadAprendizaje facadeSubUnidadAprendizaje;
     /*private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;*/
-    private static FacadeUsuario facadeUsuario;
-    private static FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
+    private static FacadeUsuario facadeUsuario;    
    /* 
     public static FacadeHorarioSubUnidadAprendizaje getInstanceFacadeHorarioSubUnidadAprendizaje() {
         if (facadeHorarioSubUnidadAprendizaje == null) {
@@ -68,15 +66,5 @@ public class ServiceFacadeLocator {
         } else {
             return facadeUsuario;
         }
-    }
-    
-    //AGREGUE ESTO, PARA EL JOIN ENTRE PROFESOR SUBUNIDADAPRENDIZAJE Y UNIDADAPRENDIZAJE
-    public static FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje getInstanceFacadeProfesorSubUnidadAprendizajeUnidadAprendizaje() {
-        if (facadeProfesorSubUnidadAprendizajeUnidadAprendizaje == null) {
-            facadeProfesorSubUnidadAprendizajeUnidadAprendizaje = new FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje();
-            return facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
-        } else {
-            return facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
-        }
-    }
+    }    
 }
