@@ -7,6 +7,7 @@ package mx.dreamcatchersoftware.facade;
 
 import java.util.List;
 import mx.dreamcatchersoftware.delegate.DelegateSubUnidadAprendizaje;
+import mx.dreamcatchersoftware.entidad.SubUnidadAprendizaje;
 
 /**
  *
@@ -19,7 +20,14 @@ public class FacadeSubUnidadAprendizaje {
         this.delegateSubUnidadAprendizaje = new DelegateSubUnidadAprendizaje();
     }
     
-    public List consultProfesorUnidadAprendizaje(String nombre_unidad_aprendizaje){
+    /*public List consultProfesorUnidadAprendizaje(String nombre_unidad_aprendizaje){
         return delegateSubUnidadAprendizaje.consultProfesorUnidadAprendizaje(nombre_unidad_aprendizaje);
+    }*/
+    public void insertSubUnidadAprendizaje(SubUnidadAprendizaje subunidadaprendizaje){
+        delegateSubUnidadAprendizaje.insertSubUnidadAprendizaje(subunidadaprendizaje);
+    }
+    
+    public List consultSubUnidadAprendizaje(){
+        return delegateSubUnidadAprendizaje.consultSubUnidadAprendizaje();
     }
 }

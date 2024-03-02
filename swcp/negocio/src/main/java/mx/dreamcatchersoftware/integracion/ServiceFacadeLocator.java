@@ -8,8 +8,8 @@ package mx.dreamcatchersoftware.integracion;
 //import mx.dreamcatchersoftware.facade.FacadeHorarioSubUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeProfesor;
 import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
-/*import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
-import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;*/
+/*import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;*/
+import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeUsuario;
 import mx.dreamcatchersoftware.facade.FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
 /**
@@ -21,7 +21,7 @@ public class ServiceFacadeLocator {
     //private static FacadeHorarioSubUnidadAprendizaje facadeHorarioSubUnidadAprendizaje;
     private static FacadeProfesor facadeProfesor;
     private static FacadeSubUnidadAprendizaje facadeSubUnidadAprendizaje;
-    /*private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;*/
+    private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;
     private static FacadeUsuario facadeUsuario;
     private static FacadeProfesorSubUnidadAprendizajeUnidadAprendizaje facadeProfesorSubUnidadAprendizajeUnidadAprendizaje;
    /* 
@@ -51,7 +51,7 @@ public class ServiceFacadeLocator {
             return facadeSubUnidadAprendizaje;
         }
     }
-    /*
+    
     public static FacadeUnidadAprendizaje getInstanceFacadeUnidadAprendizaje() {
         if (facadeUnidadAprendizaje == null) {
             facadeUnidadAprendizaje = new FacadeUnidadAprendizaje();
@@ -59,7 +59,7 @@ public class ServiceFacadeLocator {
         } else {
             return facadeUnidadAprendizaje;
         }
-    }*/
+    }
     
     public static FacadeUsuario getInstanceFacadeUsuario() {
         if (facadeUsuario == null) {

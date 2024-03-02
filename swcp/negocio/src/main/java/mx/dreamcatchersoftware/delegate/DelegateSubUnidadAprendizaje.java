@@ -12,22 +12,25 @@ import mx.dreamcatchersoftware.integracion.ServiceLocator;
 
 public class DelegateSubUnidadAprendizaje {
     
-    public List consultProfesorUnidadAprendizaje(String nombre_unidad_aprendizaje){
-        List<Profesor> sub_unidad_aprendizaje = ServiceLocator.getInstanceProfesorDAO().executeQuery(
-                "SELECT *" +
-                "FROM sub_unidad_aprendizaje" +
-                "JOIN profesor ON sub_unidad_aprendizaje.id_profesor = profesor.id_profesor" +
-                "JOIN unidad_aprendizaje ON sub_unidad_aprendizaje.id_unidad_aprendizaje = unidad_aprendizaje.id_unidad_aprendizaje" +
-                "WHERE unidad_aprendizaje.nombre = 'Algoritmos y Estructuras de Datos';");
-        
-        if(sub_unidad_aprendizaje != null){
-            System.out.println("NO ESTA VACIA");
-        }else{
-            System.out.println("VACIA");
+    public void insertSubUnidadAprendizaje(SubUnidadAprendizaje subunidadaprendizaje){
+        try{
+            ServiceLocator.getInstanceSubUnidadAprendizajeDAO().save(subunidadaprendizaje);            
+        }catch(Exception e){
+            System.out.println("Error al insertar usuario negocio-delegateUsuario 1");
+            System.out.println("\n "+e);            
         }
-        return sub_unidad_aprendizaje;
-        //profesor.id_profesor,profesor.nombre, profesor.apellido, unidad_aprendizaje.nombre
     }
+    public List consultSubUnidadAprendizaje(){
+        List<SubUnidadAprendizaje> subunidadesaprendizaje = null;
+        try{
+            subunidadesaprendizaje = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().findAll();
+        }catch(Exception e){
+            System.out.println("Error al realizar la consulta de profesores negocio-delegateProfesor 2");
+            System.out.println("\n "+e);            
+        }
+        return subunidadesaprendizaje;
+    }   
+        //profesor.id_profesor,profesor.nombre, profesor.apellido, unidad_aprendizaje.nombre
 }
 
 /*

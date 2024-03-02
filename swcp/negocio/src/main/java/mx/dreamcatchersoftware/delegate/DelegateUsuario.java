@@ -18,13 +18,14 @@ public class DelegateUsuario {
     public Usuario login(String password, String correo){
         Usuario usuario = new Usuario();
         List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
-        
+        boolean existe = false;
         for(Usuario us:usuarios){
             if(us.getContrasena().equalsIgnoreCase(password) && us.getCorreo().equalsIgnoreCase(correo)){
                 usuario = us;
+                existe = true;
             }
         }
-        if(usuario == null){
+        if(existe==false){
             System.out.println("El usuario No existe");
         }else{
             System.out.println("Se inicio sesión con exito");
@@ -84,8 +85,6 @@ public class DelegateUsuario {
         Usuario usuario = new Usuario();
         List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
         try{
-            
-        
             for(Usuario us:usuarios){
                 if(us.getIdUsuario().toString().equalsIgnoreCase(String.valueOf(id_usuario))){
                     usuario = us;
