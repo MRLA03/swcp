@@ -37,7 +37,7 @@ public class DelegateProfesor {
     //Consulta General de profesores
     public List consultProfesores(){
         List<Object[]> profesores = new ArrayList<>();
-        List<Object[]> profesoresV = new ArrayList<>();
+        List<Object[]> profesoresV = new ArrayList<>();        
         try{
             profesores = ServiceLocator.getInstanceProfesorDAO().executeNoEntity("SELECT * FROM profesor");
         }catch(Exception e){
@@ -45,16 +45,48 @@ public class DelegateProfesor {
             System.out.println("\n "+e);            
         }               
         for(Object[] row: profesores){
-            List<Object[]> subUnidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeNoEntity("SELECT id_profesor FROM sub_unidad_aprendizaje WHERE id_profesor = "+row[0]+";");
-            // Crear un nuevo array para contener los elementos de ambos arrays
-            Object[] nuevoArray = new Object[row.length + subUnidad.toArray().length];
+            List<Object[]> subUnidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeNoEntity("SELECT id_unidad_aprendizaje FROM sub_unidad_aprendizaje WHERE id_profesor = "+row[0]+";");
+            //System.out.println("SOUT; "+subUnidad.toArray()[1]);
+            Object un = subUnidad.toArray()[0];            
+            System.out.println("AAA: "+un);
+            
+            String nombreUnidadesAcademicas = "";            
+            String cadenaIdUnidadAprendizaje = subUnidad.toString();                        
+            if(subUnidad.size()>1){
+                String[] arregloIdDnidadAprendizaje = this.arregloUnidadesAprendizajeID(cadenaIdUnidadAprendizaje);
+                for(int x=0;x<arregloIdDnidadAprendizaje.length;x++){
+                    //System.out.println("Arreglo: "+arregloIdDnidadAprendizaje[x]);
+                    List<Object[]> nombreUn = ServiceLocator.getInstanceUnidadAprendizajeDAO().executeNoEntity("SELECT nombre FROM unidad_aprendizaje WHERE id_unidad_aprendizaje = "+arregloIdDnidadAprendizaje[x]+";");
+                    System.out.println("NOMBRES: "+nombreUn.toString());
+                    nombreUnidadesAcademicas = nombreUnidadesAcademicas+Arrays.toString(nombreUn.toArray());
+                    //Ocupo ir agregando no sobreescribir
+                }
+                //System.out.println("HOLLLLLLLLLLLLLLLLLLLAAAAAAAA: "+arregloIdDnidadAprendizaje);
+            }else{
+                System.out.println("AAAADDDDDDDDDDDIIIIIIIIIOOOOOOOSSSSSSS");
+                String idUnidadA = subUnidad.toString();
+                idUnidadA = idUnidadA.replace("[", "");
+                idUnidadA = idUnidadA.replace("]", "");
+                idUnidadA = idUnidadA.replace(" ", "");
+                List<Object[]> nombreUn = ServiceLocator.getInstanceUnidadAprendizajeDAO().executeNoEntity("SELECT nombre FROM unidad_aprendizaje WHERE id_unidad_aprendizaje = "+idUnidadA+";");
+                nombreUnidadesAcademicas = Arrays.deepToString(nombreUn.toArray());
+            }
+            nombreUnidadesAcademicas = nombreUnidadesAcademicas.replace("][", ", ");
+            nombreUnidadesAcademicas = nombreUnidadesAcademicas.replace("[", "");
+            nombreUnidadesAcademicas = nombreUnidadesAcademicas.replace("]", "");            
+            System.out.println("TIPO:"+subUnidad.toString());
+                        
+            // Crear un nuevo array para contener los elementos de ambos arrays            
+            String unidades = Arrays.deepToString(subUnidad.toArray());            
+            unidades = unidades.substring(1, unidades.length() - 1);
+            Object[] nuevoArray = new Object[row.length];
 
             // Copiar los elementos de row al nuevo array
             System.arraycopy(row, 0, nuevoArray, 0, row.length);
 
             // Copiar los elementos de subUnidad al nuevo array, empezando desde el índice correcto
-            System.arraycopy(subUnidad.toArray(), 0, nuevoArray, row.length, subUnidad.toArray().length);
-
+            //System.arraycopy(subUnidad.toArray(), 0, nuevoArray, row.length, subUnidad.toArray().length);
+            nuevoArray[nuevoArray.length-1] = nombreUnidadesAcademicas;
             // Sobrescribir row con el nuevo array
             //System.out.println(Arrays.toString(nuevoArray)+"LINEA");            
             profesoresV.add(nuevoArray);
@@ -65,6 +97,14 @@ public class DelegateProfesor {
         }
         
         return profesoresV;
+    }
+    
+    public String[] arregloUnidadesAprendizajeID(String cadena){        
+        cadena = cadena.replace("[", "");
+        cadena = cadena.replace("]", "");
+        cadena = cadena.replace(" ", "");
+        String[] retorno = cadena.split(",");
+        return retorno;
     }
     
     // Consulta de usuarios por ID

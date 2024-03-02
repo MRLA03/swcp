@@ -66,7 +66,9 @@ public class test {
         }*/
         
         List<Object[]> prof =ServiceFacadeLocator.getInstanceFacadeProfesor().consultProfesores();
-        if (prof != null) {
+        System.out.println("Unidades Academicas"+prof.get(0)[prof.get(0).length-1]);
+        System.out.println("TODO\n");
+        if (prof != null) {            
             prof.forEach((sua) -> {
                 System.out.println(Arrays.toString(sua) + "\n");
             });
