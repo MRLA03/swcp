@@ -31,6 +31,19 @@ public class DelegateProfesor {
         }
         return bandera;
     }
+    
+    public boolean deleteProfesor(Profesor profesor){
+        boolean bandera;
+        try{
+            ServiceLocator.getInstanceProfesorDAO().delete(profesor);
+            bandera=true;
+        }catch(Exception e){
+            System.out.println("Error al insertar profesor negocio-delegateProfesor 1");
+            System.out.println("\n "+e);
+            bandera=false;
+        }
+        return bandera;
+    }
 
     //Consulta General de profesores
     public List consultProfesores(){
@@ -69,7 +82,6 @@ public class DelegateProfesor {
             System.out.println("Error al realizar la consulta de profesores por Nombre y Apellido  por id negocio-delegateProfesor 4");
             System.out.println("\n "+e); 
         }
-        
         return profesores;
     }
         

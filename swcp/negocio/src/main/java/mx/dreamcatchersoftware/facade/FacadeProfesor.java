@@ -21,6 +21,10 @@ public class FacadeProfesor {
         return delegateProfesor.insertProfesor(profesor);
     }
     
+    public boolean deleteProfesor(Profesor profesor){
+        return delegateProfesor.deleteProfesor(profesor);
+    }    
+    
     public List consultProfesores(){
         return delegateProfesor.consultProfesores();
     }

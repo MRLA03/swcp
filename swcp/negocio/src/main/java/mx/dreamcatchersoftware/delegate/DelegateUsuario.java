@@ -18,18 +18,24 @@ public class DelegateUsuario {
     public Usuario login(String password, String correo){
         Usuario usuario = new Usuario();
         List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         for(Usuario us:usuarios){
             if(us.getContrasena().equalsIgnoreCase(password) && us.getCorreo().equalsIgnoreCase(correo)){
                 usuario = us;
             }
         }
+<<<<<<< Updated upstream
         if(usuario == null){
             System.out.println("El usuario No existe");
         }else{
             System.out.println("Se inicio sesión con exito");
         }
         
+=======
+>>>>>>> Stashed changes
         return usuario;
     }
     
