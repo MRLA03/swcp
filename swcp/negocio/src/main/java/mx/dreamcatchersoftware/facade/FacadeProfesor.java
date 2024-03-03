@@ -25,7 +25,18 @@ public class FacadeProfesor {
         return delegateProfesor.consultProfesores();
     }
     
-    public Profesor consultProfesorID(int id_profesor){
+    public Profesor consultProfesorID(String id_profesor){
         return delegateProfesor.consultProfesorID(id_profesor);
+    }
+    public List consultProfesoresUnidadAprendizaje(){
+        return delegateProfesor.consultProfesoresUnidadAprendizaje();
+    }
+    
+    public List consultProfesoresxUnidadAprendizaje(String unidad_aprendizaje){
+        return delegateProfesor.consultProfesoresxUnidadAprendizaje(unidad_aprendizaje);
+    }
+    
+    public boolean deleteProfesorIdProfesor(String id_profesor){
+        return delegateProfesor.deleteProfesorIdProfesor(id_profesor);
     }
 }

@@ -6,10 +6,11 @@
 package mx.dreamcatchersoftware.integracion;
 
 //import mx.dreamcatchersoftware.facade.FacadeHorarioSubUnidadAprendizaje;
+import mx.dreamcatchersoftware.facade.FacadeHorarioSubUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeProfesor;
 import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
-/*import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
-import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;*/
+import mx.dreamcatchersoftware.facade.FacadeSubUnidadAprendizaje;
+import mx.dreamcatchersoftware.facade.FacadeUnidadAprendizaje;
 import mx.dreamcatchersoftware.facade.FacadeUsuario;
 /**
  *
@@ -17,12 +18,12 @@ import mx.dreamcatchersoftware.facade.FacadeUsuario;
  */
 public class ServiceFacadeLocator {
     
-    //private static FacadeHorarioSubUnidadAprendizaje facadeHorarioSubUnidadAprendizaje;
+    private static FacadeHorarioSubUnidadAprendizaje facadeHorarioSubUnidadAprendizaje;
     private static FacadeProfesor facadeProfesor;
     private static FacadeSubUnidadAprendizaje facadeSubUnidadAprendizaje;
-    /*private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;*/
+    private static FacadeUnidadAprendizaje facadeUnidadAprendizaje;
     private static FacadeUsuario facadeUsuario;    
-   /* 
+    
     public static FacadeHorarioSubUnidadAprendizaje getInstanceFacadeHorarioSubUnidadAprendizaje() {
         if (facadeHorarioSubUnidadAprendizaje == null) {
             facadeHorarioSubUnidadAprendizaje = new FacadeHorarioSubUnidadAprendizaje();
@@ -30,7 +31,7 @@ public class ServiceFacadeLocator {
         } else {
             return facadeHorarioSubUnidadAprendizaje;
         }
-    }*/
+    }
     
     public static FacadeProfesor getInstanceFacadeProfesor() {
         if (facadeProfesor == null) {
@@ -49,7 +50,7 @@ public class ServiceFacadeLocator {
             return facadeSubUnidadAprendizaje;
         }
     }
-    /*
+    
     public static FacadeUnidadAprendizaje getInstanceFacadeUnidadAprendizaje() {
         if (facadeUnidadAprendizaje == null) {
             facadeUnidadAprendizaje = new FacadeUnidadAprendizaje();
@@ -57,7 +58,7 @@ public class ServiceFacadeLocator {
         } else {
             return facadeUnidadAprendizaje;
         }
-    }*/
+    }
     
     public static FacadeUsuario getInstanceFacadeUsuario() {
         if (facadeUsuario == null) {

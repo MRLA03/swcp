@@ -20,8 +20,8 @@ public class FacadeUsuario {
         return delegateUsuario.login(password, correo);
     }
     
-    public void insertUsario(Usuario usuario){
-        delegateUsuario.insertUsuario(usuario);
+    public boolean insertUsario(Usuario usuario){
+        return delegateUsuario.insertUsuario(usuario);
     }
     
     public void updateUsuario(String correo, String contrasena){
@@ -32,9 +32,9 @@ public class FacadeUsuario {
         return delegateUsuario.consultUsuarios();
     }
     
-    public Usuario consultUsuariosID(int id_usuario){
+    /*public Usuario consultUsuariosID(int id_usuario){
         return delegateUsuario.consultUsuariosID(id_usuario);
-    }
+    }*/
     
     public Usuario consultUsuariosCorreoCompleto(String correo){
         return delegateUsuario.consultUsuariosCorreoCompleto(correo);

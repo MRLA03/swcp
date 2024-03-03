@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import mx.dreamcatchersoftware.entidad.SubUnidadAprendizaje;
 import mx.dreamcatchersoftware.entidad.Usuario;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2024-02-29T22:04:47")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2024-03-02T19:18:40")
 @StaticMetamodel(Profesor.class)
 public class Profesor_ { 
 

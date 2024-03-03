@@ -8,7 +8,7 @@ import mx.dreamcatchersoftware.entidad.HorarioSubUnidadAprendizaje;
 import mx.dreamcatchersoftware.entidad.Profesor;
 import mx.dreamcatchersoftware.entidad.UnidadAprendizaje;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2024-02-29T22:04:47")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2024-03-02T19:18:40")
 @StaticMetamodel(SubUnidadAprendizaje.class)
 public class SubUnidadAprendizaje_ { 
 

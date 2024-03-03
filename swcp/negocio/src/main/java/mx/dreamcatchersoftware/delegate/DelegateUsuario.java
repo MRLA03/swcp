@@ -5,8 +5,10 @@
  */
 package mx.dreamcatchersoftware.delegate;
 
+import java.util.ArrayList;
 import java.util.List;
 import mx.dreamcatchersoftware.entidad.Usuario;
+import mx.dreamcatchersoftware.integracion.ServiceFacadeLocator;
 import mx.dreamcatchersoftware.integracion.ServiceLocator;
 
 /**
@@ -38,40 +40,56 @@ public class DelegateUsuario {
      * @param usuario de tipo usuario con id 0 para poder que se cree un id nuevo
      */
     //PBI-US-UH1
-    public void insertUsuario(Usuario usuario){                    
-        try{    
-            ServiceLocator.getInstanceUsuarioDAO().save(usuario);
+    public boolean insertUsuario(Usuario usuario){
+        Usuario us = new Usuario();
+        boolean bandera = true;
+        try{
+            us = ServiceFacadeLocator.getInstanceFacadeUsuario().consultUsuariosCorreoCompleto(usuario.getCorreo());
+            if(us.getCorreo() == ""){
+                ServiceLocator.getInstanceUsuarioDAO().save(usuario);
+            }else{
+                bandera = false;
+            }
         }catch(Exception e){
             System.out.println("Error al insertar usuario negocio-delegateUsuario 1");
             System.out.println("\n "+e);
         }
+        return bandera;
     }
     /*
         Método de para actualizar Usuario
     */
     //PBI-US-UH2
-    public void updateUsuario(String correo, String contrasena){
-        Usuario usuario = new Usuario();
-        List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
-        for(Usuario us:usuarios){
+    public boolean updateUsuario(String correo, String contrasena){
+        boolean bandera = true;
+        Usuario usuario = new Usuario();                               
+        /*for(Usuario us:usuarios){
             if(us.getCorreo().equalsIgnoreCase(correo)){
                 us.setContrasena(contrasena);
                 usuario = us;
             }
-        }
-        
-        if(usuario == null || usuario.getIdUsuario() == 0) {
-            throw new IllegalArgumentException("Error Actualizar Usuario Code: Negocio-delegateUsuario 2");
-        }        
-        ServiceLocator.getInstanceUsuarioDAO().update(usuario);
+        }*/
+                  
+        try{
+            usuario = ServiceFacadeLocator.getInstanceFacadeUsuario().consultUsuariosCorreoCompleto(correo);
+            if(usuario.getCorreo()==""){
+                usuario.setContrasena(contrasena);
+                ServiceLocator.getInstanceUsuarioDAO().update(usuario);   
+            }else{
+                bandera = false;
+            }
+        }catch(Exception e){
+            System.out.println("Error Actualizar Usuario Code: Negocio-delegateUsuario 2\n"+e);
+        }  
+        return bandera;
     }
     
     // Consulta General de Usuarios
     // PBI- PROF- UH1
     public List consultUsuarios(){
-        List<Object[]> usuarios = null;
+        List<Usuario> usuarios = null;
         try{
-            usuarios = ServiceLocator.getInstanceUsuarioDAO().executeNoEntity("SELECT * FROM usuario;");//ServiceLocator.getInstanceUsuarioDAO().findAll();
+            usuarios = ServiceLocator.getInstanceUsuarioDAO().executeQuery("SELECT * FROM usuario;");//ServiceLocator.getInstanceUsuarioDAO().findAll();
         }catch(Exception e){
             System.out.println("Error al realizar la consulta de Usuario negocio-delegateUsuario 3");
             System.out.println("\n "+e);            
@@ -80,33 +98,16 @@ public class DelegateUsuario {
     }
     // Consulta de usuarios por id
     // PBI- PROF- UH1
-    public Usuario consultUsuariosID(int id_usuario){
-        Usuario usuario = new Usuario();
-        List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
-        try{                    
-            for(Usuario us:usuarios){
-                if(us.getIdUsuario().toString().equalsIgnoreCase(String.valueOf(id_usuario))){
-                    usuario = us;
-                }
-            }           
-        }catch(Exception e){
-            System.out.println("Error al realizar la consulta de Usuario  por id negocio-delegateUsuario 4");
-            System.out.println("\n "+e);            
-        }
-        return usuario;
-    }
     // Consulta de usuarios por correo
     // PBI- PROF- UH1
     public Usuario consultUsuariosCorreoCompleto(String correo){
         Usuario usuario = new Usuario();
-        List<Usuario> usuarios = ServiceLocator.getInstanceUsuarioDAO().findAll();
+        List<Usuario> usuarios = new ArrayList<>();
         try{
-            
+            usuarios = ServiceLocator.getInstanceUsuarioDAO().executeQuery("SELECT * FROM usuario WHERE correo = "+correo+";");
         
-            for(Usuario us:usuarios){
-                if(us.getCorreo().equalsIgnoreCase(correo)){
-                    usuario = us;
-                }
+            for(Usuario us:usuarios){                
+                    usuario = us;                
             }           
         }catch(Exception e){
             System.out.println("Error al realizar la consulta de Usuario por correo completo negocio-delegateUsuario 5");

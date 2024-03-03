@@ -8,47 +8,70 @@ package mx.dreamcatchersoftware.delegate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import mx.dreamcatchersoftware.entidad.Profesor;
+import mx.dreamcatchersoftware.entidad.SubUnidadAprendizaje;
+import mx.dreamcatchersoftware.integracion.ServiceFacadeLocator;
 import mx.dreamcatchersoftware.integracion.ServiceLocator;
 
 public class DelegateSubUnidadAprendizaje {
-    //Consulta General Profesor
-    public List consultProfesorUnidadAprendizaje(String nombre_unidad_aprendizaje){ 
-        List<Object[]> completo = new ArrayList<>();
-        List<Object[]> sub_unidad_aprendizaje = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeNoEntity(
-                "SELECT * FROM sub_unidad_aprendizaje;");
-       /* List<Object[]> unidad_aprendizaje = ServiceLocator.getInstanceUnidadAprendizajeDAO().executeNoEntity(
-                "SELECT * FROM unidad_aprendizaje;");*/
-        for(Object[] row: sub_unidad_aprendizaje){
-            List<Object[]> profesor = ServiceLocator.getInstanceProfesorDAO().executeNoEntity(
-                "SELECT * FROM profesor WHERE id_profesor = "+row[2]+";");            
-            List<Object[]> unidad_aprendizaje = ServiceLocator.getInstanceUnidadAprendizajeDAO().executeNoEntity(
-                "SELECT nombre FROM unidad_aprendizaje WHERE id_unidad_aprendizaje = "+row[1]+";");              
-            System.out.println("UNIDAD"+Arrays.deepToString(profesor.toArray()));
-            System.out.println("UNIDAD"+unidad_aprendizaje.toString());
-                       
-            Object[] nuevoArray = new Object[row.length + unidad_aprendizaje.toArray().length];
-
-            // Copiar los elementos de array1 al nuevo array
-            System.arraycopy(row, 0, nuevoArray, 0, row.length);
-
-            // Copiar los elementos de array2 al nuevo array, empezando desde el índice correcto
-            System.arraycopy(unidad_aprendizaje.toArray(), 0, nuevoArray, row.length, unidad_aprendizaje.toArray().length);
-            
-            // Unir prof unAp y row y pasarlo a completo                        
-            completo.add(nuevoArray);            
+    
+    public List consultSubUnidadAprendizaje(){
+        List<SubUnidadAprendizaje> subunidad = new ArrayList<>();
+        try{
+            subunidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().findAll();
+        }catch(Exception e){
+            System.out.println("DelegtSubUnidad Aprendizaje\n"+e);
         }
-        //+
-                //"JOIN profesor ON sub_unidad_aprendizaje.id_profesor = profesor.id_profesor" +
-                //"JOIN unidad_aprendizaje ON sub_unidad_aprendizaje.id_unidad_aprendizaje = unidad_aprendizaje.id_unidad_aprendizaje" +
-                //"WHERE sub_unidad_aprendizaje.id_sub_unidad_aprendizaje = 1;");
-        
-        if(sub_unidad_aprendizaje != null){
-            System.out.println("NO ESTA VACIA");
-        }else{
-            System.out.println("VACIA");
+        return subunidad;
+    }
+    
+    public SubUnidadAprendizaje consultSubUnidadAprendizajeIdUnidadAprendizaje(String id_unidad){
+        SubUnidadAprendizaje sub = new SubUnidadAprendizaje();
+        try{
+           List<SubUnidadAprendizaje> subunidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeQuery("SELECT * FROM sub_unidad_aprendizaje WHERE id_unidad_aprendizaje = "+id_unidad+";");            
+           for(SubUnidadAprendizaje s: subunidad){
+               sub = s;
+           } 
+        }catch(Exception e){
+            System.out.println("DelegtSubUnidad Aprendizaje\n"+e);
+        }
+        return sub;
+    }
+       
+    public List consultSubUnidadAprendizajeIdProfesor(String id_profesor){        
+        List<SubUnidadAprendizaje> subunidad = new ArrayList<>();
+        List<String[]> completo = new ArrayList<>();        
+        try{            
+        /*Profesor prof = new Profesor();
+        prof = ServiceFacadeLocator.getInstanceFacadeProfesor().consultProfesorID(id_profesor);*/
+            subunidad = ServiceLocator.getInstanceSubUnidadAprendizajeDAO().executeQuery("SELECT * FROM sub_unidad_aprendizaje WHERE id_profesor = "+id_profesor+";");            
+            for(SubUnidadAprendizaje sub: subunidad){
+                String[] cadena = new String[4];
+                cadena[0] = ""+sub.getIdSubUnidadAprendizaje();
+                cadena[1] = ""+sub.getIdUnidadAprendizaje().getIdUnidadAprendizaje();
+                cadena[2] = ""+sub.getIdUnidadAprendizaje().getNombre();
+                cadena[3] = ""+sub.getTipo();
+                completo.add(cadena);
+            }
+        }catch(Exception e){
+            System.out.println("DelegtSubUnidad Aprendizaje\n"+e);
         }
         return completo;
-        //profesor.id_profesor,profesor.nombre, profesor.apellido, unidad_aprendizaje.nombre
+    }
+    
+    public boolean updateSubUnidadAprendizajeId_SubUnidadAprendizaje(SubUnidadAprendizaje sub_unidad){
+        boolean correcto = true;
+        SubUnidadAprendizaje sub = new SubUnidadAprendizaje();
+        System.out.println("UUUUUUUUUUUUUU:: "+sub_unidad.getIdSubUnidadAprendizaje().toString());
+        try{
+            sub = ServiceFacadeLocator.getInstanceFacadeSubUnidadAprendizaje().consultSubUnidadAprendizajeIdUnidadAprendizaje(sub_unidad.getIdSubUnidadAprendizaje().toString());
+            if(sub.getTipo() !=""){
+                ServiceLocator.getInstanceSubUnidadAprendizajeDAO().update(sub_unidad);
+            }
+        }catch(Exception e){
+            System.out.println("Error  al actualizar \n"+e);
+        }
+        return correcto;
     }
 }
 
